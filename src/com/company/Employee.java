@@ -17,7 +17,7 @@
         double bonusCommission = 0.15;
         double salesTarget = 150000;
         double bonusTime = salesTarget * 0.80;    // Incentives Kick in when 80% of the sales target is met
-
+        String name = "";
         public BigDecimal money(double inputs)  //creats a method for Handling Money
         {
            return new BigDecimal(inputs).setScale(2,RoundingMode.HALF_EVEN); //sets scale and rounding mode
@@ -87,7 +87,14 @@
         public double promptForSales()
         {
             Scanner input = new Scanner(System.in);  //create new Scanner object called input
-            System.out.print("Please enter your total company sales for the year:"); //One and Only User Prompt
+            System.out.println("Please Enter the employee's name:");
+            while (!input.hasNext("[A-Za-z ]+$"))
+            {
+                System.out.println("Please Enter Only Names");
+                input.next();
+            }
+            this.name = input.next();
+            System.out.println("Please enter your total company sales for the year:"); //One and Only User Prompt
 
             while (!input.hasNextDouble())
             {
@@ -104,6 +111,12 @@
             System.out.println("Your Total Annual Compensation is: $" + AnnualComp);
             System.out.println(" "); //Create a line skip for easier reading
             return " ";
+        }
+        public   BigDecimal GenerateComparison(double input1,double input2)
+        {
+            BigDecimal difference = (this.Totalcommission(input1).subtract(this.Totalcommission(input2)));
+            return  difference.abs();
+
         }
     }
 
