@@ -13,6 +13,5 @@ public class Main
         Employee salesman = new Employee(); //create new Employee class
         double total = salesman.promptForSales();
         salesman.GenerateComp(total);
-        salesman.GenerateTable(total);
     }
 }
