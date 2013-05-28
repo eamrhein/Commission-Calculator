@@ -29,7 +29,7 @@
          *  The calculation changes based on whether or not employees
          *  are within 80%  of the target goal
          */
-        public BigDecimal Totalcommission (double totalSales)
+        public  BigDecimal Totalcommission (double totalSales)
         {
 
             if (totalSales < bonusTime)
@@ -55,6 +55,7 @@
          *  when an employee's total sales increases by increments of
          *  $5000
          */
+        /*
         public BigDecimal GenerateTable(double totalSales)
         {
             System.out.println("Here is an Incentive table of possible commissions");
@@ -79,22 +80,22 @@
             }
             return (new BigDecimal(0));
         }
-
-        /* --Generate Input Method
-         *
          */
 
-        public double promptForSales()
+        /* --Input Prompt Method
+         *
+         */
+        public double promptForSales(String name)
         {
             Scanner input = new Scanner(System.in);  //create new Scanner object called input
-            System.out.println("Please Enter the employee's name:");
+            System.out.println("Please Enter the " + name +" employee's name:");
             while (!input.hasNext("[A-Za-z ]+$"))
             {
                 System.out.println("Please Enter Only Names");
                 input.next();
             }
             this.name = input.next();
-            System.out.println("Please enter your total company sales for the year:"); //One and Only User Prompt
+            System.out.println("Please enter his/her total company sales for the year:"); //One and Only User Prompt
 
             while (!input.hasNextDouble())
             {
@@ -104,7 +105,7 @@
 
             return input.nextDouble(); //Store input for future use
         }
-
+        /*
         public  String GenerateComp(double input)
         {
             BigDecimal AnnualComp = this.Totalcommission(input); //calls Totalcommison() Calculator method for actual calculations
@@ -112,11 +113,14 @@
             System.out.println(" "); //Create a line skip for easier reading
             return " ";
         }
-        public   BigDecimal GenerateComparison(double input1,double input2)
+        */
+        public static BigDecimal CompareCompensation(BigDecimal input1,BigDecimal input2)
         {
-            BigDecimal difference = (this.Totalcommission(input1).subtract(this.Totalcommission(input2)));
-            return  difference.abs();
+            BigDecimal difference = (input1.subtract(input2));
+            return difference.abs();
+
 
         }
+
     }
 

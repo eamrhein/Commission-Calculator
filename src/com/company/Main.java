@@ -6,6 +6,10 @@
  */
 
 package com.company; //Package Directory, Remove if File Directories are changed
+
+
+import java.math.BigDecimal;
+
 public class Main
 {
 
@@ -13,9 +17,22 @@ public class Main
     {
         Employee salesman1 = new Employee(); //create first employee from Employee Class
         Employee salesman2 = new Employee(); //create second employee from Employee Class
-        Employee.GenerateComparison(salesman1.promptForSales(),salesman2.promptForSales());                                            //generate Comparison between employee one and employee 2
-        //salesman1.GenerateComp(salesman.total);       //Generate Annual Compensation Method
-        //salesman1.GenerateTable(total);      //Generate Compensation Table Method
+        BigDecimal total1 = salesman1.Totalcommission(salesman1.promptForSales("first"));  // Prompts for name and sales, then generates annual compensation for the first employee
+        BigDecimal total2 = salesman2.Totalcommission(salesman2.promptForSales("Second")); // Prompts for name and sales, then generates annual compensation for the second employee
+        BigDecimal answer = Employee.CompareCompensation(total1,total2); //generate Comparison between employee one and employee two
+
+        if (total1.compareTo(total2) > 0)
+        {
+           System.out.println(salesman1.name + " will make $" + answer +" more than " + salesman2.name + " this year.");
+        }
+        else if (total1.compareTo(total2)<0)
+        {
+           System.out.println(salesman2.name + " will make $" + answer + " more than " + salesman1.name + " this year.");
+        }
+        else
+        {
+           System.out.println(salesman1.name + " and " + salesman2.name + " will make an equal amount of money this year.");
+        }
 
     }
 
