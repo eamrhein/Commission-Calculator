@@ -16,7 +16,8 @@
         double commission = 0.10;
         double bonusCommission = 0.15;
         double salesTarget = 150000;
-        double bonusTime = salesTarget * 0.80;    // Incentives Kick in when 80% of the sales target is met
+        double incentive = salesTarget * 0.8;
+        double bonusTime = salesTarget;    // Incentives Kick in when 80% of the sales target is met
 
         public BigDecimal money(double inputs)  //creats a method for Handling Money
         {
@@ -32,17 +33,24 @@
         public BigDecimal Totalcommission (double totalSales)
         {
 
-            if (totalSales < bonusTime)
+            if (totalSales < incentive)
             {
-                double total = totalSales * this.commission;
-                double Compensation = total + this.salary;
+                double Compensation =  this.salary;
                 return money(Compensation);
             }
-            else if (totalSales>= bonusTime)
-            {
-                double total = totalSales*this.bonusCommission;
-                double Compensation = total + this.salary ;
-                return money(Compensation);
+            else if (totalSales>= incentive){
+                if (totalSales>= bonusTime)
+                {
+                    double total = totalSales*this.bonusCommission;
+                    double Compensation = total + this.salary ;
+                    return money(Compensation);
+                 }
+                else
+                {
+                   double total = totalSales*this.commission;
+                   double Compensation = total + this.salary;
+                    return money(Compensation);
+                }
             }
             else
             {
@@ -63,17 +71,25 @@
             double counterStart = totalSales;        // counter starts at input
             while (counterStart<=counterEnd)        // loops until condition is met
             {
-                if (counterStart < bonusTime)
+                if (counterStart < incentive)
                 {
-                    double commission = counterStart * this.commission;
-                    double Compensation = commission + this.salary;
+                    double Compensation =  this.salary;
                     System.out.println(" $" + money(counterStart) + "      $" + money(Compensation));
                 }
-                else if (counterStart>= bonusTime)
+                else if (counterStart>= incentive)
                 {
+                    if ( counterStart >= bonusTime)
+                    {
                     double commission = counterStart*this.bonusCommission;
                     double Compensation = commission + this.salary;
                     System.out.println(" $" + money(counterStart) + "      $" + money(Compensation));
+                    }
+                    else
+                    {
+                      double commission = counterStart*this.commission;
+                      double Compensation = commission + this.salary;
+                        System.out.println(" $" + money(counterStart) + "      $" + money(Compensation));
+                    }
                 }
                 counterStart = counterStart +5000;
             }
