@@ -6,32 +6,63 @@
  */
 
 package com.company; //Package Directory, Remove if File Directories are changed
-
-
-import java.math.BigDecimal;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main
 {
 
     public static void main(String[] args)
     {
-        Employee salesman1 = new Employee(); //create first employee from Employee Class
-        Employee salesman2 = new Employee(); //create second employee from Employee Class
-        BigDecimal total1 = salesman1.Totalcommission(salesman1.promptForSales("first"));  // Prompts for name and sales, then generates annual compensation for the first employee
-        BigDecimal total2 = salesman2.Totalcommission(salesman2.promptForSales("Second")); // Prompts for name and sales, then generates annual compensation for the second employee
-        BigDecimal answer = Employee.CompareCompensation(total1,total2); //generate Comparison between employee one and employee two
+        System.out.println("Welcome to Compensation Calculator");
+        System.out.println("How many Employees are we looking at?");
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt())
+        {
+            System.out.println("Please enter only integer numbers");
+            input.next();
+        }
+        int n = input.nextInt();
 
-        if (total1.compareTo(total2) > 0)
+       //*h
+        Employee salesman[] = new Employee[n];
+        for (int k=1; k<= salesman.length;k++)
         {
-           System.out.println(salesman1.name + " will make $" + answer +" more than " + salesman2.name + " this year.");
+            salesman[k-1] = new Employee();
         }
-        else if (total1.compareTo(total2)<0)
+
+       for (int k = 1; salesman.length >= k; k++ )
         {
-           System.out.println(salesman2.name + " will make $" + answer + " more than " + salesman1.name + " this year.");
+           salesman[k-1].setName((k));
+           salesman[k-1].setTotalsales();
+           salesman[k-1].setTotalcommission();
         }
-        else
+
+        System.out.println("What calculation would you like to perform?\n" +
+                "1. Generate An Incentive table\n" +
+                "2. Compare two employees' compensation\n" +
+                "3. Look at one employees total annual commission");
+        while (!input.hasNextInt())
         {
-           System.out.println(salesman1.name + " and " + salesman2.name + " will make an equal amount of money this year.");
+            System.out.println("Please enter only integer numbers");
+            input.next();
+        }
+        if (!input.hasNext(Pattern.compile("[123]+$"))){
+            System.out.println("That is not a valid choice");
+            System.out.print("Please enter a number between 1 and 3:");
+            input.next();
+        }
+        int g = input.nextInt();
+        if (g==1)
+        {
+            System.out.println("Which Employee do you wish to generate an incentive table for?");
+            for (int k = 1; salesman.length>=k;k++)
+            {
+                String saleName = salesman[k-1].getName();
+                System.out.println( k + ". " + saleName);
+
+                /** todo (add options for all three calculations) **/
+            }
         }
 
     }

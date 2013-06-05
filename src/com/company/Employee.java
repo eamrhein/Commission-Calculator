@@ -11,114 +11,92 @@
     import java.util.Scanner;
     public class Employee
     {
+
+        /** todo 1.(add Table Generator and Comparison Calculations)
+         *  todo 2. add an length roster attribute
+         **/
         /* Sets defaults for calculations */
-        double salary = 60000;
-        double commission = 0.10;
-        double bonusCommission = 0.15;
-        double salesTarget = 150000;
-        double bonusTime = salesTarget * 0.80;    // Incentives Kick in when 80% of the sales target is met
-        String name = "";
-        public BigDecimal money(double inputs)  //creats a method for Handling Money
+        private double salary = 60000;
+        private double commission = 0.10;
+        private double bonusCommission = 0.15;
+        private double salesTarget = 150000;
+        private double incentive = salesTarget * 0.80;    // Incentives Kick in when 80% of the sales target is met
+        private String name = "Default";
+        private double totalSales = 0.00;
+        private BigDecimal totalCommission =  new BigDecimal(0);
+        //creats a method for Handling Money
+        public BigDecimal money(double inputs)
         {
-           return new BigDecimal(inputs).setScale(2,RoundingMode.HALF_EVEN); //sets scale and rounding mode
+            return new BigDecimal(inputs).setScale(2,RoundingMode.HALF_EVEN); //sets scale and rounding mode
         }
 
-        /*  --Totalcommission Method --
-         *  method that takes an employee's total sales and performs
-         *  calculations based on attributes set in Employee.java
-         *  The calculation changes based on whether or not employees
-         *  are within 80%  of the target goal
-         */
-        public  BigDecimal Totalcommission (double totalSales)
-        {
-
-            if (totalSales < bonusTime)
-            {
-                double total = totalSales * this.commission;
-                double Compensation = total + this.salary;
-                return money(Compensation);
-            }
-            else if (totalSales>= bonusTime)
-            {
-                double total = totalSales*this.bonusCommission;
-                double Compensation = total + this.salary ;
-                return money(Compensation);
-            }
-            else
-            {
-                return (new BigDecimal(0));
-            }
-
-        }
-        /* -- GenerateTable Method --
-         *  print out a table that shows how commission would increase
-         *  when an employee's total sales increases by increments of
-         *  $5000
-         */
-        /*
-        public BigDecimal GenerateTable(double totalSales)
-        {
-            System.out.println("Here is an Incentive table of possible commissions");
-            System.out.println("[Total Sales][Total Compensation]");
-            double counterEnd = (totalSales * 1.50); // loop end condition
-            double counterStart = totalSales;        // counter starts at input
-            while (counterStart<=counterEnd)        // loops until condition is met
-            {
-                if (counterStart < bonusTime)
-                {
-                    double commission = counterStart * this.commission;
-                    double Compensation = commission + this.salary;
-                    System.out.println(" $" + money(counterStart) + "      $" + money(Compensation));
-                }
-                else if (counterStart>= bonusTime)
-                {
-                    double commission = counterStart*this.bonusCommission;
-                    double Compensation = commission + this.salary;
-                    System.out.println(" $" + money(counterStart) + "      $" + money(Compensation));
-                }
-                counterStart = counterStart +5000;
-            }
-            return (new BigDecimal(0));
-        }
-         */
-
-        /* --Input Prompt Method
-         *
-         */
-        public double promptForSales(String name)
+        /** setName Method
+         *  Method to Set String
+         *  Name Attribute
+         **/
+        public void setName(int g)
         {
             Scanner input = new Scanner(System.in);  //create new Scanner object called input
-            System.out.println("Please Enter the " + name +" employee's name:");
+            System.out.println("Please Enter employee number " + g + "'s name:");
             while (!input.hasNext("[A-Za-z ]+$"))
             {
                 System.out.println("Please Enter Only Names");
                 input.next();
             }
-            this.name = input.next();
-            System.out.println("Please enter his/her total company sales for the year:"); //One and Only User Prompt
 
+            name = input.next();
+        }
+
+
+        public String getName()
+        {
+        return name;
+        }
+
+        public void setTotalsales()
+        {
+            Scanner input = new Scanner(System.in);
+            System.out.println("Please enter his/her total company sales for the year:"); //One and Only User Prompt
             while (!input.hasNextDouble())
             {
                 System.out.println("Please Enter Only Numbers");
                 input.next();
             }
 
-            return input.nextDouble(); //Store input for future use
+            totalSales= input.nextDouble(); //Store input for future use
         }
-        /*
-        public  String GenerateComp(double input)
-        {
-            BigDecimal AnnualComp = this.Totalcommission(input); //calls Totalcommison() Calculator method for actual calculations
-            System.out.println("Your Total Annual Compensation is: $" + AnnualComp);
-            System.out.println(" "); //Create a line skip for easier reading
-            return " ";
-        }
-        */
-        public static BigDecimal CompareCompensation(BigDecimal input1,BigDecimal input2)
-        {
-            BigDecimal difference = (input1.subtract(input2));
-            return difference.abs();
 
+
+
+
+        public void setTotalcommission ()
+        {
+
+            if (totalSales < incentive)
+            {
+                double Compensation = this.salary;
+                totalCommission = money(Compensation);
+            }
+            else if (totalSales>= incentive)
+            {
+                if (totalSales >= salesTarget)
+                {
+                double total = totalSales*this.bonusCommission;
+                double Compensation = total + this.salary ;
+                totalCommission = money(Compensation);
+                }
+                else
+                {
+                    double total = totalSales*this.commission;
+                    double Compensation = total + this.salary;
+                    totalCommission = money(Compensation);
+                }
+
+            }
+            else
+            {
+                totalCommission =(new BigDecimal(0));
+            }
 
         }
 
