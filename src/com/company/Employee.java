@@ -12,7 +12,7 @@
     public class Employee
     {
 
-        /** todo 1.(add Table Generator and Comparison Calculations)
+        /** todo 1.(add Table Generator )
          *  todo 2. add an length roster attribute
          **/
         /* Sets defaults for calculations */
@@ -66,7 +66,10 @@
             totalSales= input.nextDouble(); //Store input for future use
         }
 
-
+        public double getTotalSales()
+        {
+        return totalSales;
+        }
 
 
         public void setTotalcommission ()
@@ -98,6 +101,9 @@
                 totalCommission =(new BigDecimal(0));
             }
 
+        }
+        public BigDecimal getTotalCommission(){
+            return totalCommission;
         }
 
     }
