@@ -1,4 +1,5 @@
 Commission-Calculator
 =====================
+My First School Project:
 
-Commission Calculator
+Written in Java
