@@ -1,5 +1,8 @@
 Commission-Calculator
 =====================
-My First School Project:
+Simple command line application to calculate sales commission for commission based Jobs.
 
-Written in Java
+Depencies: 
+[JDK](http://www.oracle.com/technetwork/java/index.html)
+
+Written in [Java](https://home.java.net/)
